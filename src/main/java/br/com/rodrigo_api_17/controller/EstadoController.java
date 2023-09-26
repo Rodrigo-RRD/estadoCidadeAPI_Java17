@@ -19,21 +19,27 @@ public class EstadoController {
     EstadoService estadoService;
 
     @PostMapping()
-    public ResponseEntity<Estado> salvarEstado(@RequestBody Estado estado){
+    public ResponseEntity<Estado> salvarEstado(@RequestBody Estado estado) {
 
         Estado response = estadoService.salvar(estado);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/all", produces = "application/json")
-    public ResponseEntity<List<Estado>> buscarTodos(){
+    public ResponseEntity<List<Estado>> buscarTodos() {
 
         List<Estado> response = estadoService.buscarTodos();
         return ResponseEntity.ok(response);
     }
 
+    /*
+     * @PathVariable é uma anotação usada para mapear uma parte da URL de uma
+     * solicitação HTTP para um parâmetro de método em um controlador. Essa anotação
+     * é frequentemente usada em controladores RESTful para extrair valores de
+     * variáveis ​​de caminho (path variables) das URLs das solicitações.
+     */
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Estado> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<Estado> buscarPorId(@PathVariable Long id) {
 
         Optional<Estado> response = estadoService.buscarPorId(id);
         if (response.isPresent()) {
@@ -43,7 +49,7 @@ public class EstadoController {
     }
 
     @GetMapping(path = "/nome/{nome}")
-    public ResponseEntity<List<Estado>> buscarPorNome(@PathVariable String nome){
+    public ResponseEntity<List<Estado>> buscarPorNome(@PathVariable String nome) {
 
         List<Estado> response = estadoService.buscarPorNome(nome);
         if (response != null && !response.isEmpty()) {
@@ -52,8 +58,14 @@ public class EstadoController {
         return ResponseEntity.notFound().build();
     }
 
+    /*
+     * @RequestBody é uma anotação usada para indicar que um parâmetro de método de
+     * um controlador deve ser vinculado ao corpo (body) da solicitação HTTP.
+     * Geralmente, é usado para receber dados enviados pelo cliente em uma
+     * solicitação POST, PUT ou PATCH
+     */
     @PutMapping()
-    public ResponseEntity<Estado> update(@RequestBody Estado estado){
+    public ResponseEntity<Estado> update(@RequestBody Estado estado) {
 
         if (!estadoService.buscarPorId(estado.getId()).isPresent()) {
             return ResponseEntity.notFound().build();
@@ -62,15 +74,8 @@ public class EstadoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-
-        if (!estadoService.buscarPorId(id).isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        estadoService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return estadoService.deleteById(id);
     }
-
-
 
 }

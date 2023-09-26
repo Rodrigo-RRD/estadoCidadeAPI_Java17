@@ -1,6 +1,7 @@
 package br.com.rodrigo_api_17.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.rodrigo_api_17.model.Estado;
@@ -38,9 +39,12 @@ public class EstadoService {
         return estadoRepository.findByNomeAndAtivo(nome, true);
     }
 
-    public void deleteById(Long id) {
-        estadoRepository.deleteById(id);
+    public ResponseEntity<?> deleteById(Long id){
+        Optional<Estado> response = buscarPorId(id);
+        if (!response.isPresent()) {    //se esta presente
+            return ResponseEntity.notFound().build();
+        }
+        response.get().setAtivo(false);
+        return ResponseEntity.ok(estadoRepository.save(response.get()));
     }
-
-
 }
