@@ -23,6 +23,7 @@ public class Cidade {
     private Long id;
 
     String nome;
+    private Boolean ativo;
 
     @ManyToOne
     @JoinColumn(name = "id_estado")

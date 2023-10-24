@@ -16,11 +16,20 @@ public class EstadoService {
     @Autowired
     EstadoRepository estadoRepository;
 
+    
+    /** 
+     * @param estado textoqualquer
+     * @return Estado
+     */
     public Estado salvar(Estado estado){
         estado.setAtivo(true);
         return estadoRepository.save(estado);
     }
 
+    
+    /** 
+     * @return List<Estado>
+     */
     public List<Estado> buscarTodos(){
         List<Estado> response = estadoRepository.findAll();
         response.removeIf(estado -> !estado.getAtivo());

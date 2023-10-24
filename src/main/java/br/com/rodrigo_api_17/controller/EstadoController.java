@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.com.rodrigo_api_17.model.Cidade;
 import br.com.rodrigo_api_17.model.Estado;
 import br.com.rodrigo_api_17.service.EstadoService;
 
@@ -18,6 +19,10 @@ public class EstadoController {
     @Autowired
     EstadoService estadoService;
 
+    /**
+     * @param estado
+     * @return ResponseEntity<Estado>
+     */
     @PostMapping()
     public ResponseEntity<Estado> salvarEstado(@RequestBody Estado estado) {
 
@@ -25,6 +30,9 @@ public class EstadoController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * @return ResponseEntity<List<Estado>>
+     */
     @GetMapping(path = "/all", produces = "application/json")
     public ResponseEntity<List<Estado>> buscarTodos() {
 
@@ -76,6 +84,12 @@ public class EstadoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return estadoService.deleteById(id);
+    }
+
+    @PostMapping("/saveVarios")
+    public ResponseEntity<Cidade> saveVarios(@RequestBody Estado estado) {
+        estadoService.salvar(estado);
+        return ResponseEntity.ok().body(null);
     }
 
 }
