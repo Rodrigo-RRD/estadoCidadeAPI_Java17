@@ -1,11 +1,10 @@
-package br.com.rodrigo_api_17.service;
+package br.com.terceiroperiodo.service;
 
+import br.com.terceiroperiodo.model.Estado;
+import br.com.terceiroperiodo.repository.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import br.com.rodrigo_api_17.model.Estado;
-import br.com.rodrigo_api_17.repository.EstadoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,4 +55,5 @@ public class EstadoService {
         response.get().setAtivo(false);
         return ResponseEntity.ok(estadoRepository.save(response.get()));
     }
+
 }

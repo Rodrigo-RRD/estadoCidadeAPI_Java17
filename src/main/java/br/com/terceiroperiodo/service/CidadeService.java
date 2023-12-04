@@ -1,17 +1,22 @@
-package br.com.rodrigo_api_17.service;
+package br.com.terceiroperiodo.service;
+
+import br.com.terceiroperiodo.model.Cidade;
+import br.com.terceiroperiodo.repository.CidadeRepository;
+import br.com.terceiroperiodo.repository.EstadoRepository;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import br.com.rodrigo_api_17.model.Cidade;
-import br.com.rodrigo_api_17.repository.CidadeRepository;
-import br.com.rodrigo_api_17.repository.EstadoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class CidadeService {
 
     @Autowired
@@ -29,12 +34,11 @@ public class CidadeService {
         return cidadeRepository.save(cidade);
     }
 
-    
-    /** 
+    /**
      * @param cidade
      * @return ResponseEntity<?>
      */
-    public ResponseEntity<?> salvarVarios(List <Cidade> cidade){
+    public ResponseEntity<?> salvarVarios(List<Cidade> cidade) {
         cidadeRepository.saveAll(cidade);
         return ResponseEntity.ok().body(null);
     }
@@ -62,4 +66,10 @@ public class CidadeService {
         return ResponseEntity.ok(cidadeRepository.save(response.get()));
     }
 
+    public Page<Cidade> getAllCidadesByPage(Integer page, Integer size) {
+        Pageable currentPage = PageRequest.of(page, size);
+        Page<Cidade> response = cidadeRepository.findAll(currentPage);
+        log.info("getAllCidadesByPage() - size: <{}>, context: <{}>", response.getSize(), response.getContent());
+        return response;
+    }
 }

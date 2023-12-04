@@ -1,10 +1,10 @@
-package br.com.rodrigo_api_17;
+package br.com.terceiroperiodo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RodrigoApi17ApplicationTests {
+class TerceiroPeriodoApplicationTests {
 
 	@Test
 	void contextLoads() {

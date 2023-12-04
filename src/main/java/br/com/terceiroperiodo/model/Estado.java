@@ -1,12 +1,10 @@
-package br.com.rodrigo_api_17.model;
+package br.com.terceiroperiodo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
-
-
 
 @Data
 @Entity

@@ -1,17 +1,13 @@
-package br.com.rodrigo_api_17;
+package br.com.terceiroperiodo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RodrigoApi17Application {
+public class TerceiroPeriodoApplication {
 
-	
-	/** 
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		SpringApplication.run(RodrigoApi17Application.class, args);
+		SpringApplication.run(TerceiroPeriodoApplication.class, args);
 	}
 
 }

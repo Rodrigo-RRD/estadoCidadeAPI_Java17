@@ -1,27 +1,31 @@
-package br.com.rodrigo_api_17.controller;
+package br.com.terceiroperiodo.controller;
 
+import br.com.terceiroperiodo.model.Cidade;
+import br.com.terceiroperiodo.repository.CidadeRepository;
+import br.com.terceiroperiodo.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import br.com.rodrigo_api_17.model.Cidade;
-import br.com.rodrigo_api_17.service.CidadeService;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*") // disponivel a todos
+@CrossOrigin(origins = "*")
 @RequestMapping("/cidade")
 public class CidadeController {
 
     @Autowired
     CidadeService cidadeService;
 
+    @Autowired
+    CidadeRepository cidadeRepository;
+
     /**
      * @param cidade
      * @return ResponseEntity<Cidade>
      */
-    @PostMapping(path = "/saveCidade", produces = "application/json")
+    @PostMapping(path = "/savecidade")
     public ResponseEntity<Cidade> salvarCidade(@RequestBody Cidade cidade) {
 
         Cidade response = cidadeService.salvar(cidade);
@@ -59,4 +63,10 @@ public class CidadeController {
         return cidadeService.deleteById(id);
     }
 
+    @GetMapping(path = "/pageable/all", produces = "application/json")
+    public ResponseEntity<Page<Cidade>> buscarTodosPaginado(@RequestParam Integer page, @RequestParam Integer size){
+
+        Page<Cidade> response = cidadeService.getAllCidadesByPage(page, size);
+        return ResponseEntity.ok(response);
+    }
 }

@@ -1,12 +1,11 @@
-package br.com.rodrigo_api_17.controller;
+package br.com.terceiroperiodo.controller;
 
+import br.com.terceiroperiodo.model.Cidade;
+import br.com.terceiroperiodo.model.Estado;
+import br.com.terceiroperiodo.service.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import br.com.rodrigo_api_17.model.Cidade;
-import br.com.rodrigo_api_17.model.Estado;
-import br.com.rodrigo_api_17.service.EstadoService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 @RequestMapping("/estado")
 public class EstadoController {
-
+    
     @Autowired
     EstadoService estadoService;
 

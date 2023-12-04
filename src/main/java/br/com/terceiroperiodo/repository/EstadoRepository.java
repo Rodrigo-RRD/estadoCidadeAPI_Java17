@@ -1,9 +1,8 @@
-package br.com.rodrigo_api_17.repository;
+package br.com.terceiroperiodo.repository;
 
+import br.com.terceiroperiodo.model.Estado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import br.com.rodrigo_api_17.model.Estado;
 
 import java.util.List;
 
